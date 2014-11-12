@@ -10,20 +10,15 @@
     <meta name="description" content="Canvas by George Kanchanavaleerat ~ Udacity HTML5 Canvas">
 </head>
 <body>
-	<canvas id="c" width="200" height="200"></canvas>
+	<canvas id="c" width="500" height="500"></canvas>
     <script>
 	  var c = document.querySelector("#c");
 	  var ctx = c.getContext("2d");
 	  
-	  var image = new Image();
-	  
-	  image.onload = function() {
-		  console.log("Loaded image");
-		  ctx.drawImage(image, 0, 0, c.width, c.height);
-		  var saveImage = c.toDataURL();
-		  window.open(saveImage);
-	  }
-	  image.src = "images/logo.png";
+	  ctx.fillStyle = "blue";
+	  ctx.fillRect(100, 100, 100, 100);
+	  ctx.strokeRect(50, 50, 50, 50);
+	  ctx.clearRect(105, 105, 50, 50);
 	</script>
 </body>
 </html>
