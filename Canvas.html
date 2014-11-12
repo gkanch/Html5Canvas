@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>HTML 5 Canvas</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Canvas by George Kanchanavaleerat ~ Udacity HTML5 Canvas">
+</head>
+<body>
+	<canvas id="c" width="200" height="200"></canvas>
+    <script>
+	  var c = document.querySelector("#c");
+	  var ctx = c.getContext("2d");
+	  
+	  var image = new Image();
+	  
+	  image.onload = function() {
+		  console.log("Loaded image");
+		  ctx.drawImage(image, 0, 0, c.width, c.height);
+		  var saveImage = c.toDataURL();
+		  window.open(saveImage);
+	  }
+	  image.src = "images/logo.png";
+	</script>
+</body>
+</html>
