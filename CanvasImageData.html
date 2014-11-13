@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+    
+	<script>
+	  var canvas = document.querySelector("canvas");
+	  var ctx = canvas.getContext("2d");
+	  
+	  var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	  var pixelArray = imageData.data; // CanvasPixelArray
+	  var numPixels = imageData.width * imageData.height;
+	  for (var i=0; i<numPixels; i++) {
+//		console.log("x=" + x);
+//		for (var counter=1; counter<canvas.width; counter++) {
+//		  if (counter%10 == 0) {
+			pixelArray[i*4*10] = 0; //red
+			pixelArray[i*4*10+1] = 255; //green
+			pixelArray[i*4*10+2] = 0; //blue
+			pixelArray[i*4*10+3] = 255; // alpha
+//		  }
+//		}
+	  };
+	  ctx.putImageData(imageData, 0, 0);
+	</script>
+</body>
+</html>

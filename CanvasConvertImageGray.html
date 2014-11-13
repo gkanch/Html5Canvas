@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+  <canvas width="110" height="160"></canvas>
+  <script>
+  var canvas = document.querySelector("canvas");
+  var ctx = canvas.getContext("2d");
+  
+  var image = new Image();
+  image.onload = function() {
+	  ctx.drawImage(image, 0, 0);
+	  makeGrayScale();
+  }
+  
+  image.src = "images/George_HeadShot_sm.jpg";
+  
+  var makePixelGrayScale = function (r, g, b, a) {
+	  var y = (0.3*r) + (0.59*g) + (0.11*b);
+	  return {r:y, g:y, b:y, a:255};
+  }
+  
+  function makeGrayScale() {
+	  var r, g, b, a;
+	  var imageData = ctx.getImageData(0, 0, 110, 160);
+	  var numPixels = imageData.data.length/4;
+	  for (var i=0; i<numPixels; i++) {
+		  r = imageData.data[i*4+0];
+		  g = imageData.data[i*4+1];
+		  b = imageData.data[i*4+2];
+		  a = imageData.data[i*4+3];
+		  pixel = makePixelGrayScale(r, g, b, a);
+		  imageData.data[i*4+0] = pixel.r;
+		  imageData.data[i*4+1] = pixel.g;
+		  imageData.data[i*4+2] = pixel.b;
+		  imageData.data[i*4+3] = pixel.a;
+	  }
+	  ctx.putImageData(imageData, 0, 0);
+  }
+  
+/*    var canvas = document.querySelector("canvas");
+    var ctx = canvas.getContext("2d");
+    // load image
+    var image = new Image();
+    image.src = "images/George_HeadShot_sm.jpg";
+    
+    image.onload = function() {
+      ctx.drawImage(image, 0, 0);
+      // edit image
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var pixelArray = imageData.data;
+      var numPixels = imageData.width * imageData.height;
+  
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (var i=0; i<numPixels; i++) {
+        var avgRgbValue=(pixelArray[i*4]+pixelArray[i*4+1]+pixelArray[i*4+2])/3;
+        pixelArray[i*4]=avgRgbValue; // red
+        pixelArray[i*4+1]=avgRgbValue; //green
+        pixelArray[i*4+2]=avgRgbValue; //blue
+        //pixelArray[i*4+3]=255;
+        if (avgRgbValue > 0) {
+            console.log("avgRgbValue=" + avgRgbValue);
+        }
+      };
+      ctx.putImageData(imageData, 0, 0);
+    }*/
+  </script>
+</body>
+</html>
